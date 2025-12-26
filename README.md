@@ -1,4 +1,4 @@
-# Namaste React Series
+# React Series
 
 
 # Parcel
