@@ -20,7 +20,7 @@ import ReactDOM from "react-dom/client";
        
 */
 
-// Header component for header section: Logo, Nav Items
+
 const Header = () => {
   return (
     <div className="header">
@@ -39,7 +39,7 @@ const Header = () => {
   );
 };
 
-// RestaurantList is JSON Data for displaying cards
+
 const restaurantList = [
   {
     type: "restaurant",
@@ -1862,7 +1862,7 @@ const styleCard = {
   backgroundColor: "#f0f0f0",
 };
 
-// Restaurant card component: Image, name, cuisine
+
 const RestaurantCard = (props) => {
   const {resData} = props;
   const {cloudinaryImageId, name, cuisines, avgRating, costForTwo, deliveryTime} = resData?.data;
@@ -1878,8 +1878,7 @@ const RestaurantCard = (props) => {
   )
 };
 
-// Body Component for body section: It contain all restaurant cards
-// We are mapping restaurantList array and passing data to RestaurantCard component as props with unique key as index
+
 const Body = () => {
   return (
     <div className="body">
@@ -1893,11 +1892,10 @@ const Body = () => {
     </div>
   );
 };
-// Footer component for footer section
+
 const Footer = () => {
 };
 
-// AppLayout component to show: Header, Body, Footer
 const AppLayout = () => {
   return (
     <div className="app">
