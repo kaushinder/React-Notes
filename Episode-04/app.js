@@ -20,12 +20,15 @@ import ReactDOM from "react-dom/client";
        
 */
 
-
 const Header = () => {
   return (
     <div className="header">
       <div>
-        <img alt="Food img" className="logo" src="https://t3.ftcdn.net/jpg/08/29/90/88/360_F_829908823_kYsRKdQcIaYEAhHRAZTIXuSKvuVPif8w.jpg"></img>
+        <img
+          alt="Food img"
+          className="logo"
+          src="https://t3.ftcdn.net/jpg/08/29/90/88/360_F_829908823_kYsRKdQcIaYEAhHRAZTIXuSKvuVPif8w.jpg"
+        ></img>
       </div>
       <div className="nav-items">
         <ul>
@@ -39,8 +42,7 @@ const Header = () => {
   );
 };
 
-
-const restaurantList = [
+const resList = [
   {
     type: "restaurant",
     data: {
@@ -1862,39 +1864,48 @@ const styleCard = {
   backgroundColor: "#f0f0f0",
 };
 
-
 const RestaurantCard = (props) => {
-  const {resData} = props;
-  const {cloudinaryImageId, name, cuisines, avgRating, costForTwo, deliveryTime} = resData?.data;
+  const { resData } = props;
+  const {
+    cloudinaryImageId,
+    name,
+    cuisines,
+    avgRating,
+    costForTwo,
+    deliveryTime,
+  } = resData?.data;
   return (
-      <div className="res-card" style={styleCard}>
-        <img className="res-logo" alt="res-logo" src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`}/>
-        <h3>{name}</h3>
-        <h4>{cuisines.join(", ")}</h4>
-        <h4>{avgRating} stars</h4>
-        <h4>Rs. {costForTwo/100} for Two</h4>
-        <h5>{deliveryTime} minutes</h5>
-      </div>
-  )
+    <div className="res-card" style={styleCard}>
+      <img
+        className="res-logo"
+        alt="res-logo"
+        src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`}
+      />
+      <h3>{name}</h3>
+      <h4>{cuisines.join(", ")}</h4>
+      <h4>{avgRating} stars</h4>
+      <h4>Rs. {costForTwo / 100} for Two</h4>
+      <h5>{deliveryTime} minutes</h5>
+    </div>
+  );
 };
 
+// not using keys (not acceptable) <<<<<< index as key <<<<< unique id (bext practice)
 
 const Body = () => {
   return (
     <div className="body">
       <div className="search">Search</div>
       <div className="res-container">
-        {
-          restaurantList.map((restaurant, index) => (
-            <RestaurantCard resData={restaurant} key={restaurant.data.id}/>
-          ))}
+        {resList.map((restaurant, index) => (
+          <RestaurantCard resData={restaurant} key={restaurant.data.id} />
+        ))}
       </div>
     </div>
   );
 };
 
-const Footer = () => {
-};
+const Footer = () => {};
 
 const AppLayout = () => {
   return (
