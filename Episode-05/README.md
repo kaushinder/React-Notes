@@ -1,7 +1,7 @@
 # Namaste React Series
 
 
-# Parcel
+# Parcel (transplier/compiler)
 -Dev Build
 -Local Server
 -HMR = Hot Module Replacemnet
