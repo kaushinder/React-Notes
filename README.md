@@ -1,6 +1,5 @@
 # React Series
-
-# Parcel
+ Parcel 
 
 ```
 1. Dev Build
