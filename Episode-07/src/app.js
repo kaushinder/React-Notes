@@ -4,6 +4,7 @@ import Header from "./components/Header.js";
 import Body from "./components/Body.js";
 import About from "./components/About.js";
 import Contact from "./components/Contact.js";
+import Cart from "./components/Cart.js";
 import Error from "./components/Error.js";
 import RestaurantMenu from "./components/RestaurantMenu.js";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom"; // Add Outlet import
@@ -36,11 +37,15 @@ const appRouter = createBrowserRouter([
         element: <Contact />,
       },
       {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
         path: "/restaurants/:resId",
         element: <RestaurantMenu />,
-      }
+      },
     ], // Add children routes here
-    errorElement: <Error/>,
+    errorElement: <Error />,
   },
 ]);
 

@@ -1,24 +1,70 @@
-# React Series
- Parcel 
+# Namaste React Series
+
+
+# Parcel
 
 ```
-1. Dev Build
-2. Local Server
-3. HMR = Hot Module Replacemnet
-4. File Watching Algorithm 
-5. Written in C++
-6. Caching - Faster Builds
-7. Image Optimization
-8. Minification
-9. Bundle
-10. Compress
-11. Consistent Hashing
-12. Code Splitting
-13. Differential Bundling 14. Support Older Browsers
-15. Diagnostic
-16. Error Handling
-17. HTTPs
-18. Tree Shaking - Remove unused code
-19. Different dev and prod bundles
+-Dev Build
+-Local Server
+-HMR = Hot Module Replacemnet
+-File Watching Algorithm - Written in C++
+-Caching - Faster Builds
+-Image Optimization
+-Minification
+-Bundle
+-Compress
+-Consistent Hashing
+-Code Splitting
+-Differential Bundling - Support Older Browsers
+-Diagnostic
+-Error Handling
+-HTTPs
+-Tree Shaking - Remove unused code
+-Different dev and prod bundles
 
 ```
+
+
+# Namaste Food App
+
+ My Food App structure will look like this, 
+            1. Header
+                - Logo
+                - Nav Items(right side)
+                - Cart
+            2. Body
+                - Search bar
+                - Restaurants List
+                    - Restaurant card
+                        - Image
+                        - Name
+                        - Rating
+            3. Footer
+                - Links
+                - Copyrights
+       
+# Two types of Export/Import
+
+-Default Export/Import
+
+export deafult Component;
+import Component from "path";
+
+-Named Export/Import
+
+export const Component;
+import {Component} from "path";
+
+
+
+
+# React Hooks
+
+ (Normal Js functions)
+- useState() - superpoweful state variables in react
+- useEffect()
+
+
+# Routing in Web apps
+- client side Routing
+- Server side Routing
