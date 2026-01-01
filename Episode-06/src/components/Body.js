@@ -31,12 +31,13 @@ const Body = () => {
         ?.restaurants || restaurantList
     );
 
-    setFilteredRestaurants(
-      // optional chaining
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants || restaurantList
-    );
-  };
+setFilteredRestaurants(
+    // optional chaining
+    json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants || 
+    restaurantList
+  );
+
+};
 
   // Conditional renedering - ternary operator
 
