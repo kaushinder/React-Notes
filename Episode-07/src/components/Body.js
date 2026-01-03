@@ -83,12 +83,12 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {filteredRestaurants.map((restaurant, index) => (
+        {filteredRestaurants.map((restaurant) => (
           <Link
             to={"/restaurants/" + restaurant.info.id}
             key={restaurant.info.id}
           >
-            <RestaurantCard {...restaurant.info} />
+            <RestaurantCard resData={restaurant} />
           </Link>
         ))}
       </div>
