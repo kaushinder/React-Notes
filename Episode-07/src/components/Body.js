@@ -1,95 +1,44 @@
-import RestaurantCard from "./RestaurantCard.js";
 import { useEffect, useState } from "react";
-import Shimmer from "./Shimmer.js";
-import { Link } from "react-router-dom";
+import RestaurantCard from "./RestaurantCard";
+import Shimmer from "./Shimmer";
+import { RESTAURANT_LIST_API } from "../utils/constant";
 
 const Body = () => {
-  // Local State Variable - super powerful variable
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
-  const [searchText, setSearchText] = useState("");
-
-  // whenever state variables update, react triggers a reconciliation cycle(re-renders the component)
-  console.log("Body rendered");
-
   useEffect(() => {
-    fetchData();
+    fetchRestaurants();
   }, []);
 
-  const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=27.1774553&lng=78.0077653&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+  const fetchRestaurants = async () => {
+    try {
+      const response = await fetch(RESTAURANT_LIST_API);
+      const json = await response.json();
 
-    const json = await data.json();
+      const restaurants =
+        json?.data?.data?.cards[1]?.card?.card?.gridElements
+          ?.infoWithStyle?.restaurants;
 
-    setListOfRestaurants(
-      // optional chaining
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants || restaurantList
-    );
-
-    setFilteredRestaurants(
-      // optional chaining
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants || restaurantList
-    );
+      setListOfRestaurants(restaurants);
+      setFilteredRestaurants(restaurants);
+    } catch (err) {
+      console.error("Restaurant fetch failed", err);
+    }
   };
 
-  // Conditional renedering - ternary operator
+  if (listOfRestaurants.length === 0) {
+    return <Shimmer />;
+  }
 
-  return listOfRestaurants.length == 0 ? (
-    <Shimmer />
-  ) : (
+  return (
     <div className="body">
-      <div className="filter">
-        <div className="search">
-          <input
-            className="search-box"
-            type="text"
-            value={searchText}
-            onChange={(e) => {
-              setSearchText(e.target.value);
-            }}
-          />
-          <button
-            onClick={() => {
-              // filter the restaurant cards and update the ui
-              // search text
-              console.log(searchText);
-
-              const filteredRestaurant = listOfRestaurants.filter((res) =>
-                res.info.name.toLowerCase().includes(searchText.toLowerCase())
-              );
-
-              setFilteredRestaurants(filteredRestaurant);
-            }}
-          >
-            Search
-          </button>
-        </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            const filteredList = listOfRestaurants.filter(
-              (res) => parseFloat(res?.info?.avgRating) > 4
-            );
-
-            setFilteredRestaurants(filteredList);
-          }}
-        >
-          Top Rated Restaurants
-        </button>
-      </div>
       <div className="res-container">
         {filteredRestaurants.map((restaurant) => (
-          <Link
-            to={"/restaurants/" + restaurant.info.id}
+          <RestaurantCard
             key={restaurant.info.id}
-          >
-            <RestaurantCard resData={restaurant} />
-          </Link>
+            resData={restaurant}
+          />
         ))}
       </div>
     </div>

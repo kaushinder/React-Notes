@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
-import { MENU_API_URL } from "../utils/constants";
+import { MENU_API } from "../utils/constant";
 
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
-  const [error, setError] = useState(null);
-
   const { resId } = useParams();
+
+  const [resInfo, setResInfo] = useState(null);
+  const [menuCategories, setMenuCategories] = useState([]);
 
   useEffect(() => {
     fetchMenu();
@@ -15,56 +15,55 @@ const RestaurantMenu = () => {
 
   const fetchMenu = async () => {
     try {
-      const response = await fetch(MENU_API_URL + resId);
+      const response = await fetch(MENU_API + resId);
+      const json = await response.json();
 
-      // ⚠️ fetch DOES NOT fail automatically
-      if (!response.ok) {
-        throw new Error(`HTTP error ${response.status}`);
-      }
+      // 🔹 Restaurant basic info
+      const restaurantInfo =
+        json?.data?.cards[2]?.card?.card?.info;
 
-      const text = await response.text();
+      // 🔹 Menu categories (Recommended, Beverages, etc.)
+      const categories =
+        json?.data?.cards[4]?.groupedCard?.cardGroupMap
+          ?.REGULAR?.cards.filter(
+            (c) =>
+              c.card?.card?.["@type"] ===
+              "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+          );
 
-      // 🚨 Swiggy often returns EMPTY response
-      if (!text) {
-        throw new Error("Empty response (API blocked)");
-      }
+      setResInfo(restaurantInfo);
+      setMenuCategories(categories);
 
-      const json = JSON.parse(text);
-      setResInfo(json.data);
     } catch (err) {
-      console.error("Menu fetch failed:", err.message);
-      setError("Menu not available right now");
+      console.error("Menu fetch failed:", err);
     }
   };
 
-  if (error) return <h2>{error}</h2>;
   if (!resInfo) return <Shimmer />;
 
-  const { name, cuisines, costForTwoMessage } =
-    resInfo?.cards?.[2]?.card?.card?.info || {};
-
-  const itemCards =
-    resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[2]?.card
-      ?.card?.itemCards || [];
+  const { name, cuisines, costForTwoMessage } = resInfo;
 
   return (
     <div className="menu">
+      {/* Restaurant Info */}
       <h1>{name}</h1>
+      <p>{cuisines.join(", ")}</p>
+      <p>{costForTwoMessage}</p>
 
-      <p>
-        {cuisines?.join(", ")} - {costForTwoMessage}
-      </p>
+      {/* Menu */}
+      {menuCategories.map((category) => (
+        <div key={category.card.card.title}>
+          <h2>{category.card.card.title}</h2>
 
-      <h2>Menu</h2>
-
-      <ul>
-        {itemCards.map((item) => (
-          <li key={item.card.info.id}>
-            {item.card.info.name} – ₹
-            {(item.card.info.price || item.card.info.defaultPrice) / 100}
-          </li>
-        ))}
-      </ul>
+          {category.card.card.itemCards.map((item) => (
+            <div key={item.card.info.id} className="menu-item">
+              <h4>{item.card.info.name}</h4>
+              <p>{item.card.info.description}</p>
+              <p>₹ {item.card.info.price / 100}</p>
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 };

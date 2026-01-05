@@ -4,5 +4,9 @@ export const CDN_URL =
 export const LOGO_URL =
   "https://t3.ftcdn.net/jpg/08/29/90/88/360_F_829908823_kYsRKdQcIaYEAhHRAZTIXuSKvuVPif8w.jpg";
 
-export const MENU_API_URL =
-  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9352403&lng=77.624532&restaurantId=";
+export const MENU_API =
+  "https://namastedev.com/api/v1/listRestaurantMenu/";
+
+
+export const RESTAURANT_LIST_API =
+  "https://namastedev.com/api/v1/listRestaurants";
