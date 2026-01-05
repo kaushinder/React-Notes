@@ -10,7 +10,7 @@ class About extends React.Component {
   }
 
   componentDidMount() {
-    console.log("Parent - componentDidMount");
+    console.log("Parent - component Did Mount");
   }
 
   render() {
@@ -19,8 +19,8 @@ class About extends React.Component {
       <div>
         <h1>About Class Component</h1>
         <h2>This is Namaste React Series</h2>
-        <User name={"Kaushinder Raghav (function)"} location={"noida"} />
-        <UserClass name={"Kaushinder Raghav (class)"} location={"noida"} />
+        {/* <User name={"First"} location={"noida function"} /> */}
+        <UserClass name={"First"} location={"noida function"} />
       </div>
     );
   }
