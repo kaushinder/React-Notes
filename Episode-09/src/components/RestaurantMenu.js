@@ -6,6 +6,16 @@ const RestaurantMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
 
+
+  const MenuShimmer = () => (
+  <div>
+    {Array(10).fill("").map((_, i) => (
+      <div key={i} className="shimmer-line"></div>
+    ))}
+  </div>
+);
+
+
   if (!resInfo) return <Shimmer />;
 
   //  Restaurant Info
