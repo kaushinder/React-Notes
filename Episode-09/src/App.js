@@ -9,6 +9,7 @@ import Error from "./components/Error.js";
 // import Grocery from "./components/Grocery.js";
 import RestaurantMenu from "./components/RestaurantMenu.js";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom"; // Add Outlet import
+import "./index.css";
 
 
 // chunking
