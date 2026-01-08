@@ -10,6 +10,7 @@ import Error from "./components/Error.js";
 import RestaurantMenu from "./components/RestaurantMenu.js";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom"; // Add Outlet import
 import "./index.css";
+import Footer from "./components/Footer.js";
 
 
 // chunking
@@ -19,11 +20,9 @@ import "./index.css";
 // on demand loading
 // dynamic import
 
-
 const Grocery = lazy(() => import("./components/Grocery.js")); // Lazy load Grocery component
 
 const About = lazy(() => import("./components/About.js")); // Lazy load About component
-
 
 // AppLayout component with Outlet for children routes
 const AppLayout = () => {
@@ -31,6 +30,7 @@ const AppLayout = () => {
     <div className="app">
       <Header />
       <Outlet /> {/* Replace <Body /> with <Outlet /> to render child routes */}
+      <Footer />
     </div>
   );
 };
@@ -46,7 +46,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <Suspense fallback={<h1>Loading...</h1>}><About /></Suspense>,
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <About />
+          </Suspense>
+        ),
       },
       {
         path: "/contact",
@@ -54,7 +58,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/grocery",
-        element: <Suspense fallback={<h1>Loading...</h1>}><Grocery /></Suspense>,
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Grocery />
+          </Suspense>
+        ),
       },
       {
         path: "/cart",
