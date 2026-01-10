@@ -1,6 +1,3 @@
-// Custom Hook to fetch restaurant menu details
-
-
 import { useEffect, useState } from "react";
 import { MENU_API } from "../utils/constant";
 
@@ -8,14 +5,14 @@ const useRestaurantMenu = (resId) => {
   const [resInfo, setResInfo] = useState(null);
 
   useEffect(() => {
-    if (resId) fetchData();
+    fetchMenu();
   }, [resId]);
 
-  const fetchData = async () => {
+  const fetchMenu = async () => {
     try {
-      const data = await fetch(MENU_API + resId);
-      const json = await data.json();
-      setResInfo(json.data);
+      const res = await fetch(MENU_API + resId);
+      const json = await res.json();
+      setResInfo(json?.data);
     } catch (err) {
       console.error("Menu fetch failed", err);
     }
