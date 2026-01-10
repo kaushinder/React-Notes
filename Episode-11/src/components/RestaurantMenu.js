@@ -61,9 +61,7 @@ const RestaurantMenu = () => {
                   className="flex justify-between gap-6 rounded-xl bg-white p-4 shadow-sm hover:shadow-md transition"
                 >
                   <div className="flex-1">
-                    <h4 className="font-semibold text-gray-800">
-                      {info.name}
-                    </h4>
+                    <h4 className="font-semibold text-gray-800">{info.name}</h4>
 
                     {info.description && (
                       <p className="mt-1 text-sm text-gray-500">

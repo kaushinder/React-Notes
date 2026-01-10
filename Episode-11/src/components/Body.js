@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard ,{ withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { RESTAURANT_LIST_API } from "../utils/constant";
 import useOnlineStatus from "../utils/useOnlineStatus";
+
 
 // Icons
 import { FaSearch, FaStar } from "react-icons/fa";
@@ -14,32 +15,59 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [isLoading, setIsLoading] = useState(true); // ✅ LOADING STATE
 
+  const RestaurantCardWithPromoted = withPromotedLabel(RestaurantCard);
+ 
+  // whenever state variables update, the component re-renders
+  console.log("Body Rendered", listOfRestaurants);
+
   useEffect(() => {
     fetchRestaurants();
   }, []);
 
-  const fetchRestaurants = async () => {
-    try {
-      setIsLoading(true); // ✅ START SHIMMER
+const fetchRestaurants = async () => {
+  try {
+    setIsLoading(true);
 
-      const response = await fetch(RESTAURANT_LIST_API);
-      const json = await response.json();
+    const response = await fetch(RESTAURANT_LIST_API);
+    const json = await response.json();
 
-      // ⏳ simulate slow API (remove later)
-      // await new Promise((res) => setTimeout(res, 2000));
+    const cards = json?.data?.cards || json?.data?.data?.cards || [];
 
-      const restaurants =
-        json?.data?.data?.cards[1]?.card?.card?.gridElements
-          ?.infoWithStyle?.restaurants || [];
+    let restaurants = [];
 
-      setListOfRestaurants(restaurants);
-      setFilteredRestaurants(restaurants);
-    } catch (err) {
-      console.error("Restaurant fetch failed", err);
-    } finally {
-      setIsLoading(false); // ✅ STOP SHIMMER
+    for (const c of cards) {
+      const card = c?.card?.card;
+
+      // ❌ Skip category banners
+      if (card?.imageGridCards) continue;
+
+      // ✅ Primary restaurant list
+      if (card?.gridElements?.infoWithStyle?.restaurants) {
+        restaurants = card.gridElements.infoWithStyle.restaurants;
+        break;
+      }
+
+      // ✅ Alternate structure
+      if (Array.isArray(card?.carousel)) {
+        restaurants = card.carousel;
+        break;
+      }
     }
-  };
+
+    console.log("✅ FINAL RESTAURANTS:", restaurants);
+
+    setListOfRestaurants(restaurants);
+    setFilteredRestaurants(restaurants);
+  } catch (error) {
+    console.error("Fetch failed", error);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+
+
+
 
   const handleSearch = () => {
     const filtered = listOfRestaurants.filter((res) =>
@@ -116,10 +144,18 @@ const Body = () => {
       {/* 🍽 RESTAURANT GRID */}
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {filteredRestaurants.map((restaurant) => (
-          <RestaurantCard
-            key={restaurant.info.id}
-            resData={restaurant}
-          />
+          // if the restaurant is promoted, use the Higher Order Component
+          restaurant.info.aggregatedDiscountInfoV3 ? (
+            <RestaurantCardWithPromoted
+              key={restaurant.info.id} 
+              resData={restaurant}
+            />
+          ) : (
+            <RestaurantCard
+              key={restaurant.info.id}
+              resData={restaurant}
+            />
+          )
         ))}
       </div>
     </div>
