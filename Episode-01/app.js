@@ -1,4 +1,12 @@
-/* <div id="parent">
+/* //Using JavaScript
+const heading = document.createElement("h1");
+heading.innerHTML = "Hello, Namaste Js!";
+const root = document.getElementById("root");
+root.appendChild(heading);
+*/
+
+/*  //Using React
+<div id="parent">
     <div id="child">
         <h1>I'm an h1 tag</h1>
         <h2>I'm an h2 tag</h2>
@@ -8,7 +16,8 @@
         <h1>I'm an h1 tag</h1>
         <h2>I'm an h2 tag</h2>
     </div>
-</div> */
+</div> 
+*/
 
 // ReactElement (Object) => HTML(Browser Understands)
 
