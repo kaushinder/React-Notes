@@ -8,7 +8,7 @@ class About extends React.Component {
   }
 
   componentDidMount() {
-    console.log("About - componentDidMount");
+    console.log("About - component Did Mount");
   }
 
   render() {
@@ -39,7 +39,7 @@ class About extends React.Component {
               Developer Information 👨‍💻
             </h2>
 
-            <UserClass name={"Kaushinder Singh Raghav"} location={"Noida"} />
+            <UserClass name={"Kaushinder Singh Raghav"} location={"Greator Noida"} />
           </div>
 
           {/* Skills / Highlights */}
@@ -49,7 +49,7 @@ class About extends React.Component {
                 React Concepts
               </h3>
               <p className="text-sm text-gray-600">
-                Functional & Class Components, props, state, hooks,
+                Functional & Class Based Components, props, state, hooks,
                 lifecycle methods.
               </p>
             </div>
