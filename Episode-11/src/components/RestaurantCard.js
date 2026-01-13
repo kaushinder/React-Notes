@@ -21,7 +21,6 @@ const RestaurantCard = ({ resData }) => {
   return (
     <Link to={`/restaurants/${id}`}>
       <div className="group relative overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl">
-
         {/* 🌈 Glow Effect */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-orange-200/30 via-transparent to-pink-200/30" />
 
@@ -61,9 +60,7 @@ const RestaurantCard = ({ resData }) => {
             />
           )}
 
-          <h3 className="truncate text-lg font-bold text-gray-800">
-            {name}
-          </h3>
+          <h3 className="truncate text-lg font-bold text-gray-800">{name}</h3>
 
           <p className="mt-1 truncate text-sm text-gray-500">
             {cuisines.join(", ")}
@@ -84,8 +81,11 @@ const RestaurantCard = ({ resData }) => {
   );
 };
 
+// Higher Order Component for Promoted Restaurant Card
+//
+
 /* 🚀 PROMOTED HOC */
-export const withPromotedLabel = (RestaurantCard) => {
+export const withPromotedLabel =(RestaurantCard) => {
   return (props) => (
     <div className="relative">
       <span className="absolute -top-3 left-4 z-20 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 px-4 py-1 text-xs font-bold tracking-wide text-white shadow-lg">

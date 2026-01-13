@@ -14,6 +14,7 @@ const Body = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const RestaurantCardWithPromoted = withPromotedLabel(RestaurantCard);
+
   const onlineStatus = useOnlineStatus();
 
   useEffect(() => {
@@ -27,8 +28,8 @@ const Body = () => {
       const json = await res.json();
 
       const restaurants =
-        json?.data?.data?.cards?.[1]?.card?.card?.gridElements
-          ?.infoWithStyle?.restaurants || [];
+        json?.data?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants || [];
 
       setListOfRestaurants(restaurants);
       setFilteredRestaurants(restaurants);
@@ -63,9 +64,7 @@ const Body = () => {
       <div className="flex min-h-[70vh] flex-col items-center justify-center text-center">
         <MdWifiOff className="text-7xl text-orange-500 mb-4" />
         <h1 className="text-2xl font-bold">You’re Offline</h1>
-        <p className="text-gray-500 mt-1">
-          Check your internet connection
-        </p>
+        <p className="text-gray-500 mt-1">Check your internet connection</p>
       </div>
     );
   }
@@ -128,13 +127,11 @@ const Body = () => {
         </div>
       </div>
 
-      {/* 🍽 RESTAURANT GRID */}
+      {/*  RESTAURANT GRID */}
       <div className="mx-auto max-w-7xl px-6 pb-16">
         {filteredRestaurants.length === 0 ? (
           <div className="text-center text-gray-500 mt-20">
-            <h2 className="text-xl font-semibold">
-              No restaurants found 😔
-            </h2>
+            <h2 className="text-xl font-semibold">No restaurants found 😔</h2>
             <p className="mt-1">Try searching something else</p>
           </div>
         ) : (
@@ -146,10 +143,7 @@ const Body = () => {
                   resData={restaurant}
                 />
               ) : (
-                <RestaurantCard
-                  key={restaurant.info.id}
-                  resData={restaurant}
-                />
+                <RestaurantCard key={restaurant.info.id} resData={restaurant} />
               )
             )}
           </div>
