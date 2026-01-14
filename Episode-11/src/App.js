@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header.js";
 import Body from "./components/Body.js";
@@ -11,7 +11,7 @@ import RestaurantMenu from "./components/RestaurantMenu.js";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom"; // Add Outlet import
 import "./index.css";
 import Footer from "./components/Footer.js";
-
+import UserContext from "./utils/UserContext.js";
 
 // chunking
 // code splitting
@@ -26,12 +26,30 @@ const About = lazy(() => import("./components/About.js")); // Lazy load About co
 
 // AppLayout component with Outlet for children routes
 const AppLayout = () => {
+  const [userName, setUserName] = useState();
+
+  // Authentication logic can be added here
+  useEffect(() => {
+    // Make an API call and send username and password
+    const data = {
+      name: "Kaushinder Singh Raghav",
+    };
+    setUserName(data.name);
+  }, []);
+
   return (
-    <div className="app">
-      <Header />
-      <Outlet /> {/* Replace <Body /> with <Outlet /> to render child routes */}
-      <Footer />
-    </div>
+    <UserContext.Provider value={{ loggedInUser: userName }}>
+      <div className="app">
+        <UserContext.Provider
+          value={{ loggedInUser: "Kaushinder Raghav" }}
+        >
+          <Header />
+        </UserContext.Provider>
+        <Outlet />{" "}
+        {/* Replace <Body /> with <Outlet /> to render child routes */}
+        <Footer />
+      </div>
+    </UserContext.Provider>
   );
 };
 

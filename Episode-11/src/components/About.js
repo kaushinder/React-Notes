@@ -1,18 +1,19 @@
 import React from "react";
-import UserClass from "./UserClass";
+import UserClass from "./UserClass.js";
+import UserContext from "../utils/UserContext";
 
 class About extends React.Component {
   constructor(props) {
     super(props);
-    console.log("About - constructor");
+    // console.log("About - constructor");
   }
 
   componentDidMount() {
-    console.log("About - component Did Mount");
+    // console.log("About - component Did Mount");
   }
 
   render() {
-    console.log("About - render");
+    // console.log("About - render");
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 px-6 py-12">
@@ -22,6 +23,11 @@ class About extends React.Component {
             <h1 className="mb-4 text-4xl font-extrabold text-gray-800">
               About This Project 🚀
             </h1>
+            <div>
+              Logged in User: <UserContext.Consumer>
+                {({ loggedInUser }) => <span className="font-semibold text-orange-500">{loggedInUser}</span>}
+              </UserContext.Consumer>
+            </div>
 
             <p className="text-lg text-gray-600">
               This application is built while learning the{" "}

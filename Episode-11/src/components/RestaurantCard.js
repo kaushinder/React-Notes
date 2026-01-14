@@ -65,7 +65,7 @@ const { loggedInUser } = useContext(UserContext);
             />
           )}
 
-          <h3 className="truncate text-lg font-bold text-gray-800">{name}</h3>
+          <h5 className="truncate text-lg font-bold text-gray-800">{name}</h5>
           <h4>User: {loggedInUser}</h4>
 
           <p className="mt-1 truncate text-sm text-gray-500">

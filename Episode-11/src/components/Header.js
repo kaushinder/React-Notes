@@ -17,7 +17,6 @@ import {
 import { MdOnlinePrediction } from "react-icons/md";
 
 const Header = () => {
-
   const [btnNameReact, setBtnNameReact] = useState("Login");
 
   const onlineStatus = useOnlineStatus();
@@ -115,9 +114,7 @@ const Header = () => {
                 )}
               </button>
             </li>
-            <li className="font-semibold text-gray-800">
-              {loggedInUser}
-            </li>
+            <li className="font-semibold text-gray-800">{loggedInUser}</li>
           </ul>
         </nav>
       </div>
