@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { RESTAURANT_LIST_API } from "../utils/constant";
@@ -6,6 +6,7 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 
 import { FaSearch, FaStar, FaFire } from "react-icons/fa";
 import { MdWifiOff } from "react-icons/md";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -47,9 +48,11 @@ const Body = () => {
     setFilteredRestaurants(filtered);
   };
 
+  const {loggedInUser, setUserName} = useContext(UserContext);
+
   const handleTopRated = () => {
     setFilteredRestaurants(
-      listOfRestaurants.filter((res) => res.info.avgRating >= 4.5)
+      listOfRestaurants.filter((res) => res.info.avgRating >= 4.6)
     );
   };
 
@@ -92,7 +95,7 @@ const Body = () => {
                 className="ml-3 w-full outline-none text-sm"
                 placeholder="Search restaurants..."
                 value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
+                onChange={(e) => setUserName(e.target.value)}
               />
             </div>
 
@@ -123,6 +126,12 @@ const Body = () => {
             <span className="flex items-center gap-2 rounded-full bg-orange-100 px-5 py-2 text-orange-600 font-medium">
               <FaFire /> Trending
             </span>
+            <div className="search m-4 p-4 flex items-center">
+              <label className="mr-2 font-medium text-gray-700">UserName:</label> 
+              <input
+                type="text"
+                className="border border-gray-300 rounded-l-full px-4 py-2 w-64 focus:outline-none" value={loggedInUser}  onChange={(e) => setUserName(e.target.value)}/>
+            </div>
           </div>
         </div>
       </div>
