@@ -1,10 +1,14 @@
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
+
+
+  const [showIndex, setShowIndex] = useState(null);
 
   if (!resInfo) return <h1 className="p-10">Loading...</h1>;
 
@@ -32,10 +36,12 @@ const RestaurantMenu = () => {
       </p>
 
       {/* Categories Accordian */}
-      {itemCategories.map((category) => (
+      {itemCategories.map((category, index) => (
+        // controlled Components
         <RestaurantCategory
           key={category.card.card.title}
           category={category}
+          showItems={index === 1 ? true : false}
         />
       ))}
     </div>

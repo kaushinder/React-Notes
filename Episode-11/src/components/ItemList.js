@@ -2,10 +2,6 @@ import React from "react";
 import { CDN_URL } from "../utils/constant";
 
 const ItemList = ({ items }) => {
-  const handleAddItem = (item) => {
-    // console.log("Added:", item.card.info.name);
-  };
-
   return (
     <div>
       {items.map((item) => {
@@ -36,16 +32,19 @@ const ItemList = ({ items }) => {
             {/* RIGHT: Image + ADD button */}
             <div className="w-3/12 flex justify-end">
               <div className="relative">
-                {info.imageId && (
+                {info.imageId ? (
                   <img
                     src={CDN_URL + info.imageId}
                     alt={info.name}
                     className="w-28 h-28 rounded-lg object-cover"
                   />
+                ) : (
+                  <div className="w-28 h-28 bg-gray-100 rounded-lg flex items-center justify-center text-xs text-gray-400">
+                    No Image
+                  </div>
                 )}
 
                 <button
-                  onClick={() => handleAddItem(item)}
                   className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white text-green-600 font-semibold text-sm px-4 py-1 rounded shadow-md hover:bg-green-600 hover:text-white transition"
                 >
                   ADD
