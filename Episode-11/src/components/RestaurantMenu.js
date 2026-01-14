@@ -5,8 +5,10 @@ import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
-  const resInfo = useRestaurantMenu(resId);
 
+  const dummy = "Dummy data";
+
+  const resInfo = useRestaurantMenu(resId);
 
   const [showIndex, setShowIndex] = useState(null);
 
@@ -37,11 +39,12 @@ const RestaurantMenu = () => {
 
       {/* Categories Accordian */}
       {itemCategories.map((category, index) => (
-        // controlled Components
         <RestaurantCategory
           key={category.card.card.title}
           category={category}
-          showItems={index === 1 ? true : false}
+          showItems={index === showIndex}
+          setShowIndex={() => setShowIndex(showIndex === index ? null : index)}
+          dummy={dummy}
         />
       ))}
     </div>

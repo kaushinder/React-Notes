@@ -1,7 +1,9 @@
 import React from "react";
 import { CDN_URL } from "../utils/constant";
 
-const ItemList = ({ items }) => {
+const ItemList = ({ items, dummy }) => {
+  //  console.log(dummy);
+
   return (
     <div>
       {items.map((item) => {
@@ -12,7 +14,7 @@ const ItemList = ({ items }) => {
             key={info.id}
             className="flex justify-between gap-4 p-4 border-b border-gray-200"
           >
-            {/* LEFT: Text */}
+            {/* LEFT: Item details */}
             <div className="w-9/12">
               <h2 className="font-semibold text-lg text-slate-700">
                 {info.name}

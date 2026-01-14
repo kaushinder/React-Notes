@@ -2,9 +2,14 @@ import { Link } from "react-router-dom";
 import { CDN_URL } from "../utils/constant";
 import { FaStar, FaLeaf } from "react-icons/fa";
 import { MdRestaurantMenu } from "react-icons/md";
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
 
 const RestaurantCard = ({ resData }) => {
   const info = resData?.info || resData;
+
+const { loggedInUser } = useContext(UserContext);
+
   if (!info) return null;
 
   const {
@@ -61,6 +66,7 @@ const RestaurantCard = ({ resData }) => {
           )}
 
           <h3 className="truncate text-lg font-bold text-gray-800">{name}</h3>
+          <h4>User: {loggedInUser}</h4>
 
           <p className="mt-1 truncate text-sm text-gray-500">
             {cuisines.join(", ")}

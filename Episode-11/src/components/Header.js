@@ -1,7 +1,8 @@
 import { LOGO_URL } from "../utils/constant.js";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
+import UserContext from "../utils/UserContext.js";
 
 // Icons
 import {
@@ -16,8 +17,13 @@ import {
 import { MdOnlinePrediction } from "react-icons/md";
 
 const Header = () => {
+
   const [btnNameReact, setBtnNameReact] = useState("Login");
+
   const onlineStatus = useOnlineStatus();
+
+  const { loggedInUser } = useContext(UserContext);
+  console.log(loggedInUser);
 
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-md">
@@ -108,6 +114,9 @@ const Header = () => {
                   </>
                 )}
               </button>
+            </li>
+            <li className="font-semibold text-gray-800">
+              {loggedInUser}
             </li>
           </ul>
         </nav>
