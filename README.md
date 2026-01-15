@@ -59,3 +59,12 @@ import {Component} from "path";
  (Normal Js functions)
 - useState() - superpoweful state variables in react
 - useEffect()
+
+
+# Redux Toolkit
+- Install @reduxjs/toolkit and react-redux
+- Build our store
+- connect our store to our app
+- slice (cartSlice)
+- dispatch(action)
+- Selector

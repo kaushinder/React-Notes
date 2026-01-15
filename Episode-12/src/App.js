@@ -12,6 +12,9 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom"; 
 import "./index.css";
 import Footer from "./components/Footer.js";
 import UserContext from "./utils/UserContext.js";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore.js";
+// Code Splitting
 
 // chunking
 // code splitting
@@ -38,16 +41,18 @@ const AppLayout = () => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
-      <div className="app">
-        <UserContext.Provider value={{ loggedInUser: "Kaushinder Raghav" }}>
-          <Header />
-        </UserContext.Provider>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className="app">
+          <UserContext.Provider value={{ loggedInUser: "Kaushinder Raghav" }}>
+            <Header />
+          </UserContext.Provider>
         <Outlet />{" "}
         {/* Replace <Body /> with <Outlet /> to render child routes */}
         <Footer />
       </div>
     </UserContext.Provider>
+    </Provider>
   );
 };
 
