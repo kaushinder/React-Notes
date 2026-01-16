@@ -27,7 +27,7 @@ const Header = () => {
   // Subscribing to the store to store using useSelector hook
 
   const cartItems = useSelector((store) => store.cart.items);
-  console.log("Cart Items in Header:", cartItems);
+  // console.log("Cart Items in Header:", cartItems);
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">

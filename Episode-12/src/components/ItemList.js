@@ -3,24 +3,20 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../utils/cartSlice";
 
 const ItemList = ({ items, dummy }) => {
-  //  console.log(dummy);
-
   const dispatch = useDispatch();
 
   const handleAddItem = (item) => {
-    // Dispatch an Action to add item to the cart in the Redux store
-    // action creator function
     dispatch(addItem(item));
-  }
+  };
 
   return (
     <div>
-      {items.map((item) => {
+      {items.map((item, index) => {
         const info = item.card.info;
 
         return (
           <div
-            key={info.id}
+            key={`${info.id}-${index}`} // ✅ FIX: unique key
             className="flex justify-between gap-4 p-4 border-b border-gray-200"
           >
             {/* LEFT: Item details */}
@@ -56,7 +52,8 @@ const ItemList = ({ items, dummy }) => {
                 )}
 
                 <button
-                  className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white text-green-600 font-semibold text-sm px-4 py-1 rounded shadow-md hover:bg-green-600 hover:text-white transition" onClick={() => handleAddItem(item)}
+                  onClick={() => handleAddItem(item)}
+                  className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white text-green-600 font-semibold text-sm px-4 py-1 rounded shadow-md hover:bg-green-600 hover:text-white transition"
                 >
                   ADD+
                 </button>
