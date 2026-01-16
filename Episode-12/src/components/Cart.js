@@ -3,7 +3,16 @@ import ItemList from "./ItemList";
 import { clearCart } from "../utils/cartSlice";
 
 const Cart = () => {
-  const cartItems = useSelector((store) => store.cart.items);
+
+// Access the entire Redux store
+const cartItems = useSelector((store) => store.cart.items);
+
+  // const store = useSelector((store) => store);
+  // console.log("Store:", store);
+
+  // const cartItems = store.cart.items;
+  // console.log("Cart Items:", cartItems);
+
   const dispatch = useDispatch();
 
   const handleClearCart = () => {
