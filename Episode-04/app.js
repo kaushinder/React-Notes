@@ -1905,7 +1905,11 @@ const Body = () => {
   );
 };
 
-const Footer = () => {};
+const Footer = () => {
+  return <div className="footer">
+    <h4>© 2024 Food Villa</h4>
+  </div>;
+};
 
 const AppLayout = () => {
   return (
