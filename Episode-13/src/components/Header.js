@@ -32,7 +32,6 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        
         {/* LOGO */}
         <div className="flex items-center gap-3">
           <img
@@ -48,7 +47,6 @@ const Header = () => {
         {/* NAVIGATION */}
         <nav>
           <ul className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-700">
-            
             {/* Online Status */}
             <li className="flex items-center gap-1">
               <MdOnlinePrediction
@@ -58,31 +56,46 @@ const Header = () => {
             </li>
 
             <li>
-              <Link to="/" className="flex items-center gap-1 hover:text-orange-500">
+              <Link
+                to="/"
+                className="flex items-center gap-1 hover:text-orange-500"
+              >
                 <FaHome /> Home
               </Link>
             </li>
 
             <li>
-              <Link to="/about" className="flex items-center gap-1 hover:text-orange-500">
+              <Link
+                to="/about"
+                className="flex items-center gap-1 hover:text-orange-500"
+              >
                 <FaInfoCircle /> About
               </Link>
             </li>
 
             <li>
-              <Link to="/contact" className="flex items-center gap-1 hover:text-orange-500">
+              <Link
+                to="/contact"
+                className="flex items-center gap-1 hover:text-orange-500"
+              >
                 <FaPhoneAlt /> Contact
               </Link>
             </li>
 
             <li>
-              <Link to="/grocery" className="flex items-center gap-1 hover:text-orange-500">
+              <Link
+                to="/grocery"
+                className="flex items-center gap-1 hover:text-orange-500"
+              >
                 <FaStore /> Grocery
               </Link>
             </li>
 
             <li>
-              <Link to="/cart" className="flex items-center gap-1 hover:text-orange-500">
+              <Link
+                to="/cart"
+                className="flex items-center gap-1 hover:text-orange-500"
+              >
                 <FaShoppingCart /> Cart - ({cartItems.length} items)
               </Link>
             </li>
@@ -91,9 +104,7 @@ const Header = () => {
             <li>
               <button
                 onClick={() =>
-                  setBtnNameReact(
-                    btnNameReact === "Login" ? "Logout" : "Login"
-                  )
+                  setBtnNameReact(btnNameReact === "Login" ? "Logout" : "Login")
                 }
                 className="flex items-center gap-2 rounded-full bg-orange-500 px-4 py-2 text-white shadow hover:bg-orange-600 transition"
               >
@@ -111,9 +122,7 @@ const Header = () => {
 
             {/* USER NAME */}
             {loggedInUser && (
-              <li className="font-semibold text-gray-800">
-                {loggedInUser}
-              </li>
+              <li className="font-semibold text-gray-800">{loggedInUser}</li>
             )}
           </ul>
         </nav>
