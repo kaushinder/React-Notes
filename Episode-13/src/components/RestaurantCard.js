@@ -7,6 +7,9 @@ import UserContext from "../utils/UserContext";
 
 const RestaurantCard = ({ resData }) => {
   const info = resData?.info || resData;
+
+  console.log("RestaurantCard Rendered:", resData);
+
   const { loggedInUser } = useContext(UserContext);
 
   if (!info) return null;
