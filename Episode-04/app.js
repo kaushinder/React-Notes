@@ -1873,6 +1873,7 @@ const RestaurantCard = (props) => {
     avgRating,
     costForTwo,
     deliveryTime,
+    lastMileTravel,
   } = resData?.data;
   return (
     <div className="res-card" style={styleCard}>
@@ -1886,11 +1887,12 @@ const RestaurantCard = (props) => {
       <h4>{avgRating} stars</h4>
       <h4>Rs. {costForTwo / 100} for Two</h4>
       <h5>{deliveryTime} minutes</h5>
+      <h5>{lastMileTravel} kms</h5>
     </div>
   );
 };
 
-// not using keys (not acceptable) <<<<<< index as key <<<<< unique id (bext practice)
+// not using keys is (not acceptable) <<<<<< index as key <<<<< unique id (best practice)
 
 const Body = () => {
   return (
