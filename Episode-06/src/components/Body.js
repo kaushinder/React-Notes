@@ -26,7 +26,7 @@ const Body = () => {
     console.log(json);
 
     setListOfRestaurants(
-      // optional chaining
+      // optional chaining(it can be changed according to the data structure in the api)
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants || restaurantList
     );
